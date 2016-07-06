@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/TitleBarTextView"
+        android:text="传声筒" />
+    <!--android:layout_weight="1"表示渲染的先后顺序,如果值越小,越先绘制-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/content">
+
+    </FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_firewall"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background= "#FFFF"
+        >
+
+        <RadioButton
+            android:id="@+id/rb_sms"
+            style="@style/FirewallBottom"
+            android:drawableTop="@drawable/tab_icon_message"
+            android:text="消息"
+            android:textColor="@drawable/bottom_text_selector" />
+
+        <RadioButton
+            android:id="@+id/rb_phone"
+            style="@style/FirewallBottom"
+            android:drawableTop="@drawable/tab_icon_contacts"
+            android:text="联系人"
+            android:textColor="@drawable/bottom_text_selector" />
+
+        <RadioButton
+            android:id="@+id/rb_black"
+            style="@style/FirewallBottom"
+            android:drawableTop="@drawable/tab_icon_me"
+            android:text="我"
+            android:textColor="@drawable/bottom_text_selector" />
+    </RadioGroup>
+</LinearLayout>
