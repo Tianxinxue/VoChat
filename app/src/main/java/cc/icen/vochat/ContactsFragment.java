@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 /**
  * Created by Tian on 2016/7/2.
  */
-public class ContactFragment extends Fragment {
+public class ContactsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

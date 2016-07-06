@@ -41,7 +41,7 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
                 break;
             // 联系人
             case R.id.rb_phone:
-                transaction.replace(R.id.content, new ContactFragment());
+                transaction.replace(R.id.content, new ContactsFragment());
                 break;
             // 我
             case R.id.rb_black:
