@@ -6,4 +6,6 @@
 
     <color name="tab_color">#000000</color>
     <color name="tab_color_press">#293d3d</color>
+    <color name="white">#FFFF</color>
+
 </resources>
