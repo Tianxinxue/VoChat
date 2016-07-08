@@ -27,21 +27,21 @@
 
         <RadioButton
             android:id="@+id/rb_sms"
-            style="@style/FirewallBottom"
+            style="@style/TabBottom"
             android:drawableTop="@drawable/tab_icon_message"
             android:text="消息"
             android:textColor="@drawable/bottom_text_selector" />
 
         <RadioButton
             android:id="@+id/rb_phone"
-            style="@style/FirewallBottom"
+            style="@style/TabBottom"
             android:drawableTop="@drawable/tab_icon_contacts"
             android:text="联系人"
             android:textColor="@drawable/bottom_text_selector" />
 
         <RadioButton
             android:id="@+id/rb_black"
-            style="@style/FirewallBottom"
+            style="@style/TabBottom"
             android:drawableTop="@drawable/tab_icon_me"
             android:text="我"
             android:textColor="@drawable/bottom_text_selector" />

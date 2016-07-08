@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="tab_color">#000000</color>
-    <color name="tab_color_press">#293d3d</color>
+    <color name="tab_color">#FFF</color>
+    <color name="tab_color_press">#FFF</color>
     <color name="white">#FFFF</color>
 
 </resources>

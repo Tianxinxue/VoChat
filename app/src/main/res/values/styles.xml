@@ -17,7 +17,7 @@
         <item name="android:background">#4A86CE</item>
     </style>
 
-    <style name="FirewallBottom">
+    <style name="TabBottom">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>

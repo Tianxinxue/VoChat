@@ -39,13 +39,32 @@
             android:textColor="#FFFFFFFF" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@id/linearLayout_button"
+        android:id="@+id/linearLayout_edittext">
+
+        <EditText
+            android:id="@+id/et_sign_in_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/login_selector_input"
+            android:drawableLeft="@mipmap/user_account_icon"
+            android:drawablePadding="15dp"
+            android:drawableStart="@mipmap/user_account_icon"
+            android:hint="用户名/手机号"
+            android:minHeight="40dp"
+            android:singleLine="true" />
     <EditText
         android:id="@+id/et_sign_in_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_above="@id/linearLayout_button"
         android:background="@drawable/login_selector_input"
         android:drawableLeft="@mipmap/user_pwd_lock_icon"
         android:drawablePadding="15dp"
@@ -55,18 +74,5 @@
         android:inputType="textPassword"
         android:singleLine="true" />
 
-    <EditText
-        android:id="@+id/et_sign_in_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_above="@id/et_sign_in_pwd"
-        android:background="@drawable/login_selector_input"
-        android:drawableLeft="@mipmap/user_account_icon"
-        android:drawablePadding="15dp"
-        android:drawableStart="@mipmap/user_account_icon"
-        android:hint="用户名/手机号"
-        android:minHeight="40dp"
-        android:singleLine="true" />
+    </LinearLayout>
 </RelativeLayout>
