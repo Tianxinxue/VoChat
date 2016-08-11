@@ -1,4 +1,4 @@
-package cc.icen.vochat;
+package cc.icen.vochat.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

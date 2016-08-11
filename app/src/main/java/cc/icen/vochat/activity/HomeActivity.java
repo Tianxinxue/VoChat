@@ -1,4 +1,4 @@
-package cc.icen.vochat;
+package cc.icen.vochat.activity;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -6,6 +6,11 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
+
+import cc.icen.vochat.R;
+import cc.icen.vochat.fragment.ContactsFragment;
+import cc.icen.vochat.fragment.MeFragment;
+import cc.icen.vochat.fragment.MessageFragment;
 
 /**
  * Created by Tian on 2016/7/2.

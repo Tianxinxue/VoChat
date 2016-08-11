@@ -1,10 +1,12 @@
-package cc.icen.vochat;
+package cc.icen.vochat.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import cc.icen.vochat.R;
 
 /**
  * Created by Tian on 2016/7/2.
