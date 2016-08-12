@@ -1,4 +1,4 @@
-package cc.icen.vochat;
+package cc.icen.vochat.util;
 
 /**
  * Created by Tian on 2016/7/19.

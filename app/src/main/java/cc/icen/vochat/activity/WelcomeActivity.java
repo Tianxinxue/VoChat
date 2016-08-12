@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 import java.net.URLEncoder;
 
-import cc.icen.vochat.Person;
+import cc.icen.vochat.util.Person;
 import cc.icen.vochat.R;
 import cc.icen.vochat.util.HttpCallbackListener;
 import cc.icen.vochat.util.HttpUtil;
@@ -28,36 +28,6 @@ public class WelcomeActivity extends Activity implements View.OnClickListener {
     private EditText et_username;
     private Button btnSignUp;
     private Button btnSignIn;
-
-//    private Handler handler = new Handler() {
-//        @Override
-//        public void handleMessage(android.os.Message msg) {
-//            switch (msg.what) {
-//                case RESULT_OK:
-//                    if(msg.obj.toString().equals("登录成功")) {
-//                        Toast.makeText(WelcomeActivity.this, "成功:"
-//                                + msg.obj.toString(), Toast.LENGTH_LONG).show();
-//
-//                        Intent intent = new Intent();
-//                        intent.setClass(WelcomeActivity.this, HomeActivity.class);
-//                        startActivity(intent);
-//                    }else{
-//                        Toast.makeText(WelcomeActivity.this, "失败:"
-//                                + msg.obj.toString(), Toast.LENGTH_LONG).show();
-//                    }
-//                    break;
-//                case RESULT_CANCELED:
-//                    Toast.makeText(WelcomeActivity.this, "失败:"
-//                            + msg.obj.toString(), Toast.LENGTH_LONG).show();
-//                    break;
-//
-//                default:
-//                    break;
-//            }
-//        }
-//
-//        ;
-//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,73 +58,6 @@ public class WelcomeActivity extends Activity implements View.OnClickListener {
                 return;
             }
 
-//            //开启子线程
-//            new Thread(new Runnable() {
-//
-//                @Override
-//                public void run() {
-//
-//
-//                    Gson gson = new Gson();
-//                    Person person = new Person();
-//                    person.setId(username);
-//                    person.setPasswd(password);
-//                    String json = gson.toJson(person);
-//                    Log.d("tian", json);
-//                    String path = "http://192.168.1.3:8080/Login/Login";
-//                    try
-//
-//                    {
-//                        URL url = new URL(path);
-//                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                        //配置参数
-//                        connection.setRequestMethod("POST");
-//                  /*
-//                   * 设置该参数,才能以流的形式提交数据
-//                   * 需要将要提交的数据转换为字节输出流
-//                   */
-//                        connection.setDoOutput(true);
-//                        connection.setConnectTimeout(TIME_OUT);
-//                        connection.setReadTimeout(TIME_OUT);
-//                        //将提交的参数进行 URL 编码
-//                        String param = "user=" + URLEncoder.encode(json);
-//                   /*
-//                    * 设置请求属性，相当于封装 http 的请求头参数
-//                    */
-//                        //设置请求体的的长度
-//                        connection.setRequestProperty("Content-Length", param.length() + "");
-//                        //设置请求体的类型
-//                        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//                        //打开链接
-//                        connection.connect();
-//                        //获取输出流
-//                        OutputStream os = connection.getOutputStream();
-//                        //通过输出流将要提交的数据提交出去
-//                        os.write(param.getBytes());
-//                        //关闭输出流
-//                        os.close();
-//                        //判断状态码
-//                        int responseCode = connection.getResponseCode();
-//                        if (200 == responseCode) {
-//                            //获取返回值
-//                            InputStream inputStream = connection.getInputStream();
-//                            //将字节流转换为字符串
-//                            String data = StreamUtils.inputStream2String(inputStream);
-//                            handler.obtainMessage(RESULT_OK, data).sendToTarget();
-//                        } else {
-//                            handler.obtainMessage(RESULT_CANCELED, responseCode).sendToTarget();
-//                        }
-//
-//                    } catch (
-//                            Exception e
-//                            )
-//
-//                    {
-//                        e.printStackTrace();
-//                        handler.obtainMessage(RESULT_CANCELED, e).sendToTarget();
-//                    }
-//                }
-//            }).start();
 
             String address = "http://192.168.1.2:8080/Login/Login";
 
