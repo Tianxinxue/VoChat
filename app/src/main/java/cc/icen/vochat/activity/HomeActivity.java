@@ -18,6 +18,7 @@ import cc.icen.vochat.fragment.MessageFragment;
 public class HomeActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
 
 
+
     // 单选按钮组
     private RadioGroup mRadioGroup;
     // 内容页面
@@ -28,7 +29,7 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mFrameLayout = (FrameLayout) findViewById(R.id.content);
-        mRadioGroup = (RadioGroup) findViewById(R.id.rg_firewall);
+        mRadioGroup = (RadioGroup) findViewById(R.id.rg_bottom);
         mRadioGroup.setOnCheckedChangeListener(this);
         //设置 RadioButton 默认选中的页面，这里默认短信页面
         mRadioGroup.check(R.id.rb_sms);
@@ -53,7 +54,7 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
                 transaction.replace(R.id.content, new MeFragment());
                 break;
         }
-        //[6]最后一布 记得 提交事物
+        //[6]最后一步 记得 提交事物
         transaction.commit();
 
     }

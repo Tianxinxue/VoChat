@@ -59,7 +59,7 @@ public class WelcomeActivity extends Activity implements View.OnClickListener {
             }
 
 
-            String address = "http://192.168.1.2:8080/Login/Login";
+            String address = "http://192.168.1.5:8080/Login/Login";
 
             Gson gson = new Gson();
             Person person = new Person();
@@ -69,7 +69,7 @@ public class WelcomeActivity extends Activity implements View.OnClickListener {
             Log.d("tian", json);
             String param = "user=" + URLEncoder.encode(json);
 
-            HttpUtil.sendHttpRequest(address, param, new HttpCallbackListener() {
+            HttpUtil.doPost(address, param, new HttpCallbackListener() {
                 @Override
                 public void onFinish(String response) {
 
