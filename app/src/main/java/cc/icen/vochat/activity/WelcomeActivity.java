@@ -10,20 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import java.net.URLEncoder;
-
-import cc.icen.vochat.util.Person;
 import cc.icen.vochat.R;
-import cc.icen.vochat.util.HttpCallbackListener;
-import cc.icen.vochat.util.HttpUtil;
 
 public class WelcomeActivity extends Activity implements View.OnClickListener {
 
     private String TAG = "tian-";
 
-    protected static final int TIME_OUT = 5000;
     private EditText et_password;
     private EditText et_username;
     private Button btnSignUp;
@@ -57,50 +49,12 @@ public class WelcomeActivity extends Activity implements View.OnClickListener {
                 Toast.makeText(this, "用户名或密码不能为空!", Toast.LENGTH_SHORT).show();
                 return;
             }
+            if (username.equalsIgnoreCase("test") && password.equalsIgnoreCase("123")) {
 
-
-            String address = "http://192.168.1.5:8080/Login/Login";
-
-            Gson gson = new Gson();
-            Person person = new Person();
-            person.setId(username);
-            person.setPasswd(password);
-            String json = gson.toJson(person);
-            Log.d("tian", json);
-            String param = "user=" + URLEncoder.encode(json);
-
-            HttpUtil.doPost(address, param, new HttpCallbackListener() {
-                @Override
-                public void onFinish(String response) {
-
-                    if (response.toString().equals("登录成功")) {
-                        // 通过runOnUiThread()方法回到主线程处理逻辑
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(WelcomeActivity.this,
-                                        "登录成功", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent();
-                                intent.setClass(WelcomeActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                            }
-                        });
-                    }
-                }
-
-                @Override
-                public void onError(Exception e) {
-                    // 通过runOnUiThread()方法回到主线程处理逻辑
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(WelcomeActivity.this,
-                                    "登录失败", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            });
-
+                Intent intent = new Intent();
+                intent.setClass(WelcomeActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
         } else if (btnSignUp == v) {
             Log.d(TAG, "btnSignUp");
         }

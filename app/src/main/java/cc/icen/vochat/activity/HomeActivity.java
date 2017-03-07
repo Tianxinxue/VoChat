@@ -19,6 +19,10 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
 
 
 
+    private MessageFragment mMessageFragment;
+    private ContactsFragment mContactsFragment;
+    private MeFragment mMeFragment;
+
     // 单选按钮组
     private RadioGroup mRadioGroup;
     // 内容页面
@@ -28,6 +32,9 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        mMessageFragment = new MessageFragment();
+        mContactsFragment = new ContactsFragment();
+        mMeFragment = new MeFragment();
         mFrameLayout = (FrameLayout) findViewById(R.id.content);
         mRadioGroup = (RadioGroup) findViewById(R.id.rg_bottom);
         mRadioGroup.setOnCheckedChangeListener(this);
@@ -43,15 +50,15 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
         switch (checkedId) {
             //消息
             case R.id.rb_sms:
-                transaction.replace(R.id.content, new MessageFragment());
+                transaction.replace(R.id.content, mMessageFragment);
                 break;
             // 联系人
             case R.id.rb_phone:
-                transaction.replace(R.id.content, new ContactsFragment());
+                transaction.replace(R.id.content, mContactsFragment);
                 break;
             // 我
             case R.id.rb_black:
-                transaction.replace(R.id.content, new MeFragment());
+                transaction.replace(R.id.content, mMeFragment);
                 break;
         }
         //[6]最后一步 记得 提交事物
