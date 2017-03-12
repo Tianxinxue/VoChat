@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="@mipmap/call_bg"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/call_usr"
+        android:background="#0000"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"/>
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:visibility="gone">
+
+        <ImageButton
+            android:background="#0000"
+            android:id="@+id/im_button_stop_call"
+            android:layout_height="100dp"
+            android:layout_width="100dp"
+            android:scaleType="centerInside"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="40dp"
+            android:src="@drawable/call_end_selector" />
+
+        <ImageButton
+            android:background="#0000"
+            android:id="@+id/im_button_start_call"
+            android:layout_height="100dp"
+            android:layout_width="100dp"
+            android:scaleType="centerInside"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/call_start_selector" />
+    </RelativeLayout>
+
+        <ImageButton
+            android:background="#0000"
+            android:id="@+id/im_button_stop_in_call"
+            android:layout_height="100dp"
+            android:layout_width="100dp"
+            android:scaleType="centerInside"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:src="@drawable/call_end_selector" />
+
+</RelativeLayout>
+
+
