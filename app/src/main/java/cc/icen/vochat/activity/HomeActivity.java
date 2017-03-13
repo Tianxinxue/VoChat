@@ -3,6 +3,7 @@ package cc.icen.vochat.activity;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
@@ -32,6 +33,8 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        //锁定竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         mMessageFragment = new MessageFragment();
         mContactsFragment = new ContactsFragment();
         mMeFragment = new MeFragment();
