@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import cc.icen.vochat.R;
+import cc.icen.vochat.net.FriendSearcher;
 
 public class WelcomeActivity extends Activity implements View.OnClickListener {
 
@@ -37,6 +38,8 @@ public class WelcomeActivity extends Activity implements View.OnClickListener {
 
         btnSignIn.setOnClickListener(this);
         btnSignUp.setOnClickListener(this);
+
+        new FriendSearcher();
     }
 
     @Override
