@@ -1,30 +1,33 @@
 package cc.icen.vochat.net;
 
-import android.widget.Button;
+import android.util.Log;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
+import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.net.UnknownHostException;
-
-/**
- * Created by cent on 17-3-14.
- */
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 public class FriendSearcher {
 
-    public FriendSearcher(){
-
-        new Sender();
-        new Receiver();
-    }
 
     private static final int BROADCAST_PORT = 9898;
     private static final String BROADCAST_IP = "224.224.224.224";
 
     private Thread senderThread = null;
     private Thread recverThread = null;
+    private String localIP;
+
+
+    public FriendSearcher() {
+
+        new Sender();
+        new Receiver();
+    }
+
 
     private class Sender implements Runnable {
 
@@ -51,14 +54,11 @@ public class FriendSearcher {
         @Override
         public void run() {
 
-            DatagramPacket dataPacket = null;
-            //将本机的IP（这里可以写动态获取的IP）地址放到数据包里，其实server端接收到数据包后也能获取到发包方的IP的
-            byte[] data = new byte[0];
-            try {
-                data = InetAddress.getLocalHost().getHostAddress().getBytes();
-            } catch (UnknownHostException e) {
-                e.printStackTrace();
-            }
+            DatagramPacket dataPacket ;
+            byte[] data;
+
+            data = getHostIP().getBytes();
+
             dataPacket = new DatagramPacket(data, data.length, inetAddress, BROADCAST_PORT);
             while (true) {
                 if (isRuning) {
@@ -71,6 +71,36 @@ public class FriendSearcher {
                     }
                 }
             }
+
+        }
+
+        //获取本机ip地址
+        private String getHostIP() {
+
+            String hostIp = null;
+            try {
+                Enumeration nis = NetworkInterface.getNetworkInterfaces();
+                InetAddress ia = null;
+                while (nis.hasMoreElements()) {
+                    NetworkInterface ni = (NetworkInterface) nis.nextElement();
+                    Enumeration<InetAddress> ias = ni.getInetAddresses();
+                    while (ias.hasMoreElements()) {
+                        ia = ias.nextElement();
+                        if (ia instanceof Inet6Address) {
+                            continue;// skip ipv6
+                        }
+                        String ip = ia.getHostAddress();
+                        if (!"127.0.0.1".equals(ip)) {
+                            hostIp = ia.getHostAddress();
+                            break;
+                        }
+                    }
+                }
+            } catch (SocketException e) {
+                Log.i("tian--", "SocketException");
+                e.printStackTrace();
+            }
+            return hostIp;
 
         }
     }
