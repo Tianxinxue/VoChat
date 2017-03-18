@@ -29,6 +29,14 @@ public class FriendSearcher {
     }
 
 
+
+    public FriendSearcher() {
+
+        new Sender();
+        new Receiver();
+    }
+
+
     private class Sender implements Runnable {
 
         InetAddress inetAddress = null;
