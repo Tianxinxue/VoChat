@@ -9,7 +9,9 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 public class FriendSearcher {
 
@@ -19,21 +21,49 @@ public class FriendSearcher {
 
     private Thread senderThread = null;
     private Thread recverThread = null;
-    private String localIP;
+    private static String localIP;
+    private static List<String> ipList;
 
 
     public FriendSearcher() {
 
+        ipList = new ArrayList<String>();
         new Sender();
         new Receiver();
     }
 
+    //获取本机ip地址
+    private String getHostIP() {
 
+        String hostIp = null;
+        try {
+            Enumeration nis = NetworkInterface.getNetworkInterfaces();
+            InetAddress ia = null;
+            while (nis.hasMoreElements()) {
+                NetworkInterface ni = (NetworkInterface) nis.nextElement();
+                Enumeration<InetAddress> ias = ni.getInetAddresses();
+                while (ias.hasMoreElements()) {
+                    ia = ias.nextElement();
+                    if (ia instanceof Inet6Address) {
+                        continue;// skip ipv6
+                    }
+                    String ip = ia.getHostAddress();
+                    if (!"127.0.0.1".equals(ip)) {
+                        hostIp = ia.getHostAddress();
+                        break;
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            Log.i("tian--", "SocketException");
+            e.printStackTrace();
+        }
+        return hostIp;
 
-    public FriendSearcher() {
+    }
 
-        new Sender();
-        new Receiver();
+    public List<String> getIpList(){
+        return ipList;
     }
 
 
@@ -82,35 +112,6 @@ public class FriendSearcher {
 
         }
 
-        //获取本机ip地址
-        private String getHostIP() {
-
-            String hostIp = null;
-            try {
-                Enumeration nis = NetworkInterface.getNetworkInterfaces();
-                InetAddress ia = null;
-                while (nis.hasMoreElements()) {
-                    NetworkInterface ni = (NetworkInterface) nis.nextElement();
-                    Enumeration<InetAddress> ias = ni.getInetAddresses();
-                    while (ias.hasMoreElements()) {
-                        ia = ias.nextElement();
-                        if (ia instanceof Inet6Address) {
-                            continue;// skip ipv6
-                        }
-                        String ip = ia.getHostAddress();
-                        if (!"127.0.0.1".equals(ip)) {
-                            hostIp = ia.getHostAddress();
-                            break;
-                        }
-                    }
-                }
-            } catch (SocketException e) {
-                Log.i("tian--", "SocketException");
-                e.printStackTrace();
-            }
-            return hostIp;
-
-        }
     }
 
     private class Receiver implements Runnable {
@@ -118,6 +119,7 @@ public class FriendSearcher {
         InetAddress inetAddress = null;
         /*发送广播端的socket*/
         MulticastSocket multicastSocket = null;
+
 
         public Receiver() {
 
@@ -128,6 +130,8 @@ public class FriendSearcher {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            localIP = getHostIP();
             recverThread = new Thread(this);
             recverThread.start();
         }
@@ -138,6 +142,7 @@ public class FriendSearcher {
             byte buf[] = new byte[1024];
             DatagramPacket dp = null;
             dp = new DatagramPacket(buf, buf.length, inetAddress, BROADCAST_PORT);
+            ipList.add(localIP);
 
             while (true) {
                 try {
@@ -145,6 +150,9 @@ public class FriendSearcher {
                     Thread.sleep(3000);
                     String ip_recv = new String(buf, 0, dp.getLength());
                     System.out.println("检测到服务端IP : " + ip_recv);
+                    if(!ip_recv.equals(localIP) && !ipList.contains(ip_recv)) {
+                        ipList.add(ip_recv);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

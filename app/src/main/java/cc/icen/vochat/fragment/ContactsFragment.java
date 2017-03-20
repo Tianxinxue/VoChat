@@ -22,19 +22,21 @@ import cc.icen.vochat.activity.HomeActivity;
 import cc.icen.vochat.activity.InCallActivity;
 import cc.icen.vochat.media.AudioEncoder;
 import cc.icen.vochat.media.UdpReceiver;
+import cc.icen.vochat.net.FriendSearcher;
 
 
 public class ContactsFragment extends Fragment {
 
     private View view;
     private ListView lv;
+    FriendSearcher mFriendSearcher;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_contacts, null);
         lv = (ListView) view.findViewById(R.id.lv);
-
+        mFriendSearcher = new FriendSearcher();
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -44,6 +46,7 @@ public class ContactsFragment extends Fragment {
             }
         });
         //ArrayList就是动态数组
+        List<String> mIpList = mFriendSearcher.getIpList();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("icon", R.mipmap.ic_launcher);
@@ -57,6 +60,12 @@ public class ContactsFragment extends Fragment {
         map.put("icon", R.mipmap.ic_launcher);
         map.put("text", "小明");
         list.add(map);
+        for(String ip:mIpList){
+            map = new HashMap<String, Object>();
+            map.put("icon", R.mipmap.ic_launcher);
+            map.put("text", ip);
+            list.add(map);
+        }
 /**
  * 创建一个 SimpleAdapter 对象
  * 第一个参数 Context 上下文
