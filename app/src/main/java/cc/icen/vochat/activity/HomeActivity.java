@@ -5,7 +5,11 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import cc.icen.vochat.R;
@@ -16,7 +20,7 @@ import cc.icen.vochat.fragment.MessageFragment;
 /**
  * Created by Tian on 2016/7/2.
  */
-public class HomeActivity extends Activity implements RadioGroup.OnCheckedChangeListener {
+public class HomeActivity extends Activity implements RadioGroup.OnCheckedChangeListener , View.OnTouchListener {
 
 
 
@@ -35,38 +39,96 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
         setContentView(R.layout.activity_home);
         //锁定竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        mMessageFragment = new MessageFragment();
-        mContactsFragment = new ContactsFragment();
-        mMeFragment = new MeFragment();
         mFrameLayout = (FrameLayout) findViewById(R.id.content);
         mRadioGroup = (RadioGroup) findViewById(R.id.rg_bottom);
         mRadioGroup.setOnCheckedChangeListener(this);
-        //设置 RadioButton 默认选中的页面，这里默认短信页面
-        mRadioGroup.check(R.id.rb_sms);
+        findViewById(R.id.rb_contacts).setOnTouchListener(this);
+        findViewById(R.id.rb_me).setOnTouchListener(this);
+        findViewById(R.id.rb_message).setOnTouchListener(this);
+        //设置 RadioButton 默认选中的页面
+        mRadioGroup.check(R.id.rb_contacts);
 
+    }
+    private void hideAllFragment(FragmentTransaction transaction){
+        if(mMessageFragment != null){
+            transaction.hide(mMessageFragment);
+        }
+        if(mContactsFragment != null){
+            transaction.hide(mContactsFragment);
+        }
+        if(mMeFragment != null){
+            transaction.hide(mMeFragment);
+        }
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        hideAllFragment(transaction);
         switch (checkedId) {
             //消息
-            case R.id.rb_sms:
-                transaction.replace(R.id.content, mMessageFragment);
+            case R.id.rb_message:
+                if(mMessageFragment == null) {
+                    mMessageFragment = new MessageFragment();
+                    transaction.add(R.id.content, mMessageFragment);
+                }else{
+                    transaction.show(mMessageFragment);
+                }
                 break;
             // 联系人
-            case R.id.rb_phone:
-                transaction.replace(R.id.content, mContactsFragment);
+            case R.id.rb_contacts:
+                if(mContactsFragment == null) {
+                    mContactsFragment = new ContactsFragment();
+                    transaction.add(R.id.content, mContactsFragment);
+                }else{
+                    transaction.show(mContactsFragment);
+                }
                 break;
             // 我
-            case R.id.rb_black:
-                transaction.replace(R.id.content, mMeFragment);
+            case R.id.rb_me:
+                if(mMeFragment == null) {
+                    mMeFragment = new MeFragment();
+                    transaction.add(R.id.content, mMeFragment);
+                }else{
+                    transaction.show(mMeFragment);
+                }
+                break;
+            default:
                 break;
         }
-        //[6]最后一步 记得 提交事物
         transaction.commit();
 
     }
 
+    private void disableRadioGroup(RadioGroup mRadioGroup , RadioButton mRadioButton) {
+        for (int i = 0; i < mRadioGroup.getChildCount(); i++) {
+            if(mRadioGroup.getChildAt(i).getId() != mRadioButton.getId()) {
+                mRadioGroup.getChildAt(i).setEnabled(false);
+            }
+        }
+    }
+
+    private void enableRadioGroup(RadioGroup mRadioGroup , RadioButton mRadioButton) {
+        for (int i = 0; i < mRadioGroup.getChildCount(); i++) {
+            if(mRadioGroup.getChildAt(i).getId() != mRadioButton.getId()) {
+                mRadioGroup.getChildAt(i).setEnabled(true);
+            }
+        }
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if((v.getId() == R.id.rb_me) || (v.getId() == R.id.rb_contacts) || (v.getId() == R.id.rb_message)){
+            RadioButton rb = (RadioButton)findViewById(v.getId());
+            if(event.getAction()==MotionEvent.ACTION_DOWN){
+                Log.e("tian----", "ACTION_DOWN" + " " + rb.getText());
+                disableRadioGroup(mRadioGroup,(RadioButton) findViewById(v.getId()));
+            }else if(event.getAction()==MotionEvent.ACTION_UP){
+                Log.e("tian----", "ACTION_up" + " " + rb.getText());
+                enableRadioGroup(mRadioGroup,(RadioButton) findViewById(v.getId()));
+            }
+        }
+        return false;
+    }
 }

@@ -25,21 +25,21 @@
         >
 
         <RadioButton
-            android:id="@+id/rb_sms"
+            android:id="@+id/rb_message"
             style="@style/TabBottom"
             android:drawableTop="@drawable/tab_icon_message"
             android:text="消息"
             android:textColor="@drawable/bottom_text_selector" />
 
         <RadioButton
-            android:id="@+id/rb_phone"
+            android:id="@+id/rb_contacts"
             style="@style/TabBottom"
             android:drawableTop="@drawable/tab_icon_contacts"
             android:text="联系人"
             android:textColor="@drawable/bottom_text_selector" />
 
         <RadioButton
-            android:id="@+id/rb_black"
+            android:id="@+id/rb_me"
             style="@style/TabBottom"
             android:drawableTop="@drawable/tab_icon_me"
             android:text="我"
