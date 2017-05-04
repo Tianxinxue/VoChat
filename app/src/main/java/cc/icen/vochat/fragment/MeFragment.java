@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import cc.icen.vochat.R;
 import cc.icen.vochat.media.AudioEncoder;
+import cc.icen.vochat.media.RingPlayer;
 import cc.icen.vochat.media.UdpReceiver;
 
 /**
@@ -24,6 +25,12 @@ public class MeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_me, null);
+        ((Button) view.findViewById(R.id.start_button)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new RingPlayer(getActivity());
+            }
+        });
 
         return view;
     }
