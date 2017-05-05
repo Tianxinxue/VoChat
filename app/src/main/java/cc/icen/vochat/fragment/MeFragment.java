@@ -7,12 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.io.IOException;
-
 import cc.icen.vochat.R;
-import cc.icen.vochat.media.AudioEncoder;
 import cc.icen.vochat.media.RingPlayer;
-import cc.icen.vochat.media.UdpReceiver;
 
 /**
  * Created by Tian on 2016/7/2.

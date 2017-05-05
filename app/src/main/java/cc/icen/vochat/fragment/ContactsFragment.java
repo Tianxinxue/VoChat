@@ -7,21 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import cc.icen.vochat.R;
-import cc.icen.vochat.activity.HomeActivity;
 import cc.icen.vochat.activity.InCallActivity;
-import cc.icen.vochat.media.AudioEncoder;
-import cc.icen.vochat.media.UdpReceiver;
 import cc.icen.vochat.net.FriendSearcher;
 
 

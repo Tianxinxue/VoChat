@@ -18,7 +18,7 @@ import java.util.TimerTask;
 
 import cc.icen.vochat.R;
 import cc.icen.vochat.media.AudioEncoder;
-import cc.icen.vochat.media.UdpReceiver;
+import cc.icen.vochat.net.UdpReceiver;
 
 public class InCallActivity extends Activity implements View.OnClickListener {
 

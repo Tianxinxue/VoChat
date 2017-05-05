@@ -1,4 +1,4 @@
-package cc.icen.vochat.media;
+package cc.icen.vochat.net;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

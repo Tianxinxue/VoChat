@@ -1,4 +1,4 @@
-package cc.icen.vochat.media;
+package cc.icen.vochat.net;
 
 import android.os.Environment;
 import android.util.Log;
@@ -11,6 +11,8 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
+
+import cc.icen.vochat.media.AudioPlayer;
 
 public class UdpReceiver implements Runnable {
 
