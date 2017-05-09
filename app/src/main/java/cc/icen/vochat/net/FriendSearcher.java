@@ -12,22 +12,24 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import cc.icen.vochat.R;
+import cc.icen.vochat.utils.Person;
 
 public class FriendSearcher {
 
 
     private static final int BROADCAST_PORT = 9898;
-    private static final String BROADCAST_IP = "224.224.224.224";
+    private static final String BROADCAST_IP = "224.255.0.1";
 
     private Thread senderThread = null;
     private Thread recverThread = null;
     private static String localIP;
-    private static List<String> ipList;
+    private static List<Person> friendList;
 
 
     public FriendSearcher() {
 
-        ipList = new ArrayList<String>();
+        friendList = new ArrayList<Person>();
         new Sender();
         new Receiver();
     }
@@ -62,8 +64,8 @@ public class FriendSearcher {
 
     }
 
-    public List<String> getIpList(){
-        return ipList;
+    public List<Person> getFriendList(){
+        return friendList;
     }
 
 
@@ -140,18 +142,26 @@ public class FriendSearcher {
         public void run() {
 
             byte buf[] = new byte[1024];
-            DatagramPacket dp = null;
+            DatagramPacket dp;
             dp = new DatagramPacket(buf, buf.length, inetAddress, BROADCAST_PORT);
-            ipList.add(localIP);
+            friendList.add(new Person(localIP,R.mipmap.call_usr));
 
             while (true) {
                 try {
+                    int score = 0;
                     multicastSocket.receive(dp);
                     Thread.sleep(3000);
                     String ip_recv = new String(buf, 0, dp.getLength());
                     System.out.println("检测到服务端IP : " + ip_recv);
-                    if(!ip_recv.equals(localIP) && !ipList.contains(ip_recv)) {
-                        ipList.add(ip_recv);
+                    if(!ip_recv.equals(localIP) ) {
+                        for(Person person: friendList){
+                            if(ip_recv.equals(person.getName())) {
+                                score ++;
+                            }
+                        }
+                        if(score == 0){
+                            friendList.add(new Person(ip_recv,R.mipmap.call_usr));
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -12,7 +12,16 @@
         android:background="#0000"
         android:layout_alignParentTop="true"
         android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:id="@+id/iv_usr"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_id"
+        android:text="Hello"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/iv_usr"
+        android:textSize="15sp"/>
     <RelativeLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"

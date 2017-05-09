@@ -1,6 +1,7 @@
 package cc.icen.vochat.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +23,7 @@ import cc.icen.vochat.net.UdpReceiver;
 
 public class InCallActivity extends Activity implements View.OnClickListener {
 
+    public static final String FRIEND_NAME = "friend_name";
     private AudioEncoder aEncoder;
     private UdpReceiver receiver;
     private TimerTask timerTask = null;
@@ -42,10 +44,19 @@ public class InCallActivity extends Activity implements View.OnClickListener {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_in_call);
+
+        Intent intent = getIntent();
+        String friendName = intent.getStringExtra(FRIEND_NAME);
+        ((TextView) findViewById(R.id.tv_id)).setText(friendName);
         btnInCallStop = (ImageButton) findViewById(R.id.im_button_stop_in_call);
         btnInCallStop.setOnClickListener(this);
         tvTimer = (TextView) findViewById(R.id.tv_timer);
         timer = new Timer();
+        startCall();
+
+    }
+
+    void startCall() {
 
         startRecording();
         receiver = new UdpReceiver();
@@ -97,11 +108,12 @@ public class InCallActivity extends Activity implements View.OnClickListener {
         if (timerTask == null) {
             timerTask = new TimerTask() {
                 int time_sec = 0;
+
                 @Override
                 public void run() {
                     time_sec++;
                     Message message = new Message();
-                    message.what = time_sec ;
+                    message.what = time_sec;
                     handler.sendMessage(message);
                 }
             };
@@ -117,10 +129,9 @@ public class InCallActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    private Handler handler = new Handler()
-    {
+    private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-            tvTimer.setText(String.format("%02d:%02d:%02d",msg.what/3600,(msg.what%3600)/60,msg.what%60));
+            tvTimer.setText(String.format("%02d:%02d:%02d", msg.what / 3600, (msg.what % 3600) / 60, msg.what % 60));
             super.handleMessage(msg);
         }
 

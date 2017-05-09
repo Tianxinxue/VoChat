@@ -56,8 +56,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                 int position = holder.getAdapterPosition();
                 Person person = mPersonList.get(position);
                 Intent intent = new Intent(mContext, InCallActivity.class);
-//                intent.putExtra(InCallActivity.PERSON_NAME, person.getName());
-//                intent.putExtra(InCallActivity.PERSON_IMAGE_ID, person.getImageId());
+                intent.putExtra(InCallActivity.FRIEND_NAME, person.getName());
                 mContext.startActivity(intent);
             }
         });
