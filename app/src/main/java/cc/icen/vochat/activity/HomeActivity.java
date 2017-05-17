@@ -16,6 +16,7 @@ import cc.icen.vochat.R;
 import cc.icen.vochat.fragment.ContactsFragment;
 import cc.icen.vochat.fragment.MeFragment;
 import cc.icen.vochat.fragment.MessageFragment;
+import cc.icen.vochat.net.CallManager;
 
 /**
  * Created by Tian on 2016/7/2.
@@ -47,6 +48,11 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
         findViewById(R.id.rb_message).setOnTouchListener(this);
         //设置 RadioButton 默认选中的页面
         mRadioGroup.check(R.id.rb_contacts);
+
+        CallManager manager;
+
+        manager = new CallManager(this);
+        manager.sendCallRequest("127.0.0.1", 9999);
 
     }
     private void hideAllFragment(FragmentTransaction transaction){
