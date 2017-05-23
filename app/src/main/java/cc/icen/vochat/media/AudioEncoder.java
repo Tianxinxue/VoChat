@@ -17,7 +17,7 @@ import java.nio.ByteBuffer;
 import cc.icen.vochat.net.UdpUtils;
 
 public class AudioEncoder {
-    private final static String TAG = "MeidaCodec";
+    private final static String TAG = "AudioEncoder";
 
     private int TIMEOUT_USEC = 12000;
     int KEY_CHANNEL_COUNT = 1;
@@ -140,7 +140,7 @@ public class AudioEncoder {
                             while (outputBufferIndex >= 0) {
                                 ByteBuffer outputBuffer = outputBuffers[outputBufferIndex];
                                 //给adts头字段空出7的字节
-                                Log.d("tian--","length = " + bufferInfo.size);
+                                Log.d(TAG,"length = " + bufferInfo.size);
                                 int length = bufferInfo.size + 7;
                                 byte[] outData = new byte[length];
                                 addADTStoPacket(outData, length);

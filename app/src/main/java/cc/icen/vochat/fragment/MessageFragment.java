@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 
 import cc.icen.vochat.R;
 
-/**
- * Created by Tian on 2016/7/2.
- */
 public class MessageFragment extends Fragment {
 
     @Override

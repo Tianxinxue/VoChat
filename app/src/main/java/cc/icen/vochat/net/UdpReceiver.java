@@ -16,6 +16,8 @@ import cc.icen.vochat.media.AudioPlayer;
 
 public class UdpReceiver implements Runnable {
 
+    private static final String TAG = "UdpReceiver";
+
     private static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/recv.aac";
     public static final int MTU = 1300;
     public static final int localPort = 8800;
@@ -76,7 +78,7 @@ public class UdpReceiver implements Runnable {
 
             try {
                 mSocket.receive(mPacket);
-                Log.e("tian", "receive buffer" + "len: " + mPacket.getLength());
+                Log.d(TAG, "receive buffer" + "len: " + mPacket.getLength());
                 outputStream.write(mBuffer, 0, mPacket.getLength());
                 player.decodeAndPlay(mBuffer, mPacket.getLength());
             } catch (Exception e) {

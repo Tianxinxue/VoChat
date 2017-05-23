@@ -20,7 +20,7 @@ import cc.icen.vochat.utils.Person;
 
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder>{
 
-    private static final String TAG = "PersonAdapter";
+    private static final  String TAG = "ContactsAdapter";
 
     private Context mContext;
 
@@ -57,6 +57,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                 Person person = mPersonList.get(position);
                 Intent intent = new Intent(mContext, InCallActivity.class);
                 intent.putExtra(InCallActivity.FRIEND_NAME, person.getName());
+                intent.putExtra(InCallActivity.Call_UI_NAME,"start_call");
                 mContext.startActivity(intent);
             }
         });

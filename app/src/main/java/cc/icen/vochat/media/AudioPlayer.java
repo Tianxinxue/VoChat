@@ -12,6 +12,8 @@ import java.nio.ByteBuffer;
 
 public class AudioPlayer {
 
+    private static final String TAG = "AudioPlayer";
+
     private final static String MINE_TYPE = "audio/mp4a-latm";
     private MediaCodec mediaCodec;
     private AudioTrack audiotrack;
@@ -53,7 +55,7 @@ public class AudioPlayer {
     }
 
     public void decodeAndPlay(byte[] data, int len) {
-        Log.e("tian---player", "len: " + len);
+        //Log.d(TAG, "len: " + len);
         ByteBuffer[] inputBuffers = mediaCodec.getInputBuffers();
         ByteBuffer[] outputBuffers = mediaCodec.getOutputBuffers();
         int inputBufferIndex = mediaCodec.dequeueInputBuffer(-1);

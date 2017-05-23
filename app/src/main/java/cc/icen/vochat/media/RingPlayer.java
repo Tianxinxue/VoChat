@@ -17,7 +17,6 @@ public class RingPlayer implements MediaPlayer.OnCompletionListener {
         AssetFileDescriptor mFileDescriptor = context.getResources().openRawResourceFd(R.raw.ring);
 
         try {
-            //mPlayer = MediaPlayer.create(context, R.raw.ring);
             if (mPlayer == null) {
                 mPlayer = new MediaPlayer();
             }
@@ -30,8 +29,11 @@ public class RingPlayer implements MediaPlayer.OnCompletionListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mPlayer.start();
 
+    }
+
+    public void start(){
+        mPlayer.start();
     }
 
 
@@ -44,12 +46,16 @@ public class RingPlayer implements MediaPlayer.OnCompletionListener {
         }
     }
 
-    void stop() {
+    public void stop() {
         if (mPlayer.isPlaying()) {
             mPlayer.stop();
         }
         mPlayer.release();
         mPlayer = null;
+    }
+
+    public boolean isPlaying(){
+        return mPlayer.isPlaying();
     }
 
     @Override

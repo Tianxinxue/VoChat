@@ -66,12 +66,7 @@ public class UdpUtils implements Runnable {
         }
     }
 
-    /**
-     * Returns an available buffer from the FIFO, it can then be modified.
-     * Call {@link #commitBuffer(int)} to send it over the network.
-     *
-     * @throws InterruptedException
-     **/
+
     public byte[] requestBuffer() throws InterruptedException {
         mBufferRequested.acquire();
         mBuffers[mBufferIn][1] &= 0x7F;

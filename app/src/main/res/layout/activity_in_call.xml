@@ -27,7 +27,8 @@
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:id="@+id/layout_call">
 
         <ImageButton
             android:background="#0000"
@@ -69,7 +70,8 @@
         android:textColor="#FFFF"
         android:layout_above="@+id/im_button_stop_in_call"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>
 

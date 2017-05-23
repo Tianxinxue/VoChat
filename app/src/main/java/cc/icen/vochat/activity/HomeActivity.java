@@ -18,12 +18,10 @@ import cc.icen.vochat.fragment.MeFragment;
 import cc.icen.vochat.fragment.MessageFragment;
 import cc.icen.vochat.net.CallManager;
 
-/**
- * Created by Tian on 2016/7/2.
- */
+
 public class HomeActivity extends Activity implements RadioGroup.OnCheckedChangeListener , View.OnTouchListener {
 
-
+    private static  final String TAG = "HomeActivity";
 
     private MessageFragment mMessageFragment;
     private ContactsFragment mContactsFragment;
@@ -48,11 +46,6 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
         findViewById(R.id.rb_message).setOnTouchListener(this);
         //设置 RadioButton 默认选中的页面
         mRadioGroup.check(R.id.rb_contacts);
-
-        CallManager manager;
-
-        manager = new CallManager(this);
-        manager.sendCallRequest("127.0.0.1", 9999);
 
     }
     private void hideAllFragment(FragmentTransaction transaction){
@@ -128,10 +121,8 @@ public class HomeActivity extends Activity implements RadioGroup.OnCheckedChange
         if((v.getId() == R.id.rb_me) || (v.getId() == R.id.rb_contacts) || (v.getId() == R.id.rb_message)){
             RadioButton rb = (RadioButton)findViewById(v.getId());
             if(event.getAction()==MotionEvent.ACTION_DOWN){
-                Log.e("tian----", "ACTION_DOWN" + " " + rb.getText());
                 disableRadioGroup(mRadioGroup,(RadioButton) findViewById(v.getId()));
             }else if(event.getAction()==MotionEvent.ACTION_UP){
-                Log.e("tian----", "ACTION_up" + " " + rb.getText());
                 enableRadioGroup(mRadioGroup,(RadioButton) findViewById(v.getId()));
             }
         }

@@ -17,7 +17,7 @@ import cc.icen.vochat.utils.Person;
 
 public class FriendSearcher {
 
-
+    private static final String TAG = "FriendSearcher";
     private static final int BROADCAST_PORT = 9898;
     private static final String BROADCAST_IP = "224.255.0.1";
 
@@ -57,7 +57,7 @@ public class FriendSearcher {
                 }
             }
         } catch (SocketException e) {
-            Log.i("tian--", "SocketException");
+            Log.i(TAG, "SocketException");
             e.printStackTrace();
         }
         return hostIp;
@@ -105,7 +105,7 @@ public class FriendSearcher {
                     try {
                         multicastSocket.send(dataPacket);
                         Thread.sleep(3000);
-                        System.out.println("再次发送ip地址广播:.....");
+                        Log.d(TAG, "再次发送ip地址广播:.....");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -152,7 +152,7 @@ public class FriendSearcher {
                     multicastSocket.receive(dp);
                     Thread.sleep(3000);
                     String ip_recv = new String(buf, 0, dp.getLength());
-                    System.out.println("检测到服务端IP : " + ip_recv);
+                    Log.d(TAG, "检测到服务端IP : " + ip_recv);
                     if(!ip_recv.equals(localIP) ) {
                         for(Person person: friendList){
                             if(ip_recv.equals(person.getName())) {

@@ -15,7 +15,7 @@ import cc.icen.vochat.R;
 
 public class WelcomeActivity extends Activity implements View.OnClickListener {
 
-    private String TAG = "tian-";
+    private static final String TAG = "WelcomeActivity";
 
     private EditText et_password;
     private EditText et_username;
@@ -48,16 +48,16 @@ public class WelcomeActivity extends Activity implements View.OnClickListener {
             final String username = et_username.getText().toString().trim();
             final String password = et_password.getText().toString().trim();
             //校验数据
-            if (TextUtils.isEmpty(password) || TextUtils.isEmpty(username)) {
-                Toast.makeText(this, "用户名或密码不能为空!", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (username.equalsIgnoreCase("test") && password.equalsIgnoreCase("123")) {
+//            if (TextUtils.isEmpty(password) || TextUtils.isEmpty(username)) {
+//                Toast.makeText(this, "用户名或密码不能为空!", Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//            if (username.equalsIgnoreCase("test") && password.equalsIgnoreCase("123")) {
 
                 Intent intent = new Intent();
                 intent.setClass(WelcomeActivity.this, HomeActivity.class);
                 startActivity(intent);
-            }
+//            }
         } else if (btnSignUp == v) {
             Log.d(TAG, "btnSignUp");
         }

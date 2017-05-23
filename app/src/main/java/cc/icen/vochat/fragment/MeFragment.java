@@ -9,10 +9,9 @@ import android.widget.Button;
 
 import cc.icen.vochat.R;
 import cc.icen.vochat.media.RingPlayer;
+import cc.icen.vochat.net.CallManager;
 
-/**
- * Created by Tian on 2016/7/2.
- */
+
 public class MeFragment extends Fragment {
 
     View view;
@@ -24,7 +23,8 @@ public class MeFragment extends Fragment {
         ((Button) view.findViewById(R.id.start_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new RingPlayer(getActivity());
+//                CallManager manager = new CallManager(getActivity());
+//                manager.sendCallRequest("127.0.0.1", false);
             }
         });
 

@@ -5,8 +5,8 @@ import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.util.Log;
 
-
 public class AudioGainer {
+
     private static final String TAG = "AudioGainer";
     private AudioRecord mAudioRecoder;
     //存放AudioRecoder采集的PCM数据的缓冲区

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -19,17 +20,24 @@ import java.util.TimerTask;
 
 import cc.icen.vochat.R;
 import cc.icen.vochat.media.AudioEncoder;
+import cc.icen.vochat.net.CallManager;
 import cc.icen.vochat.net.UdpReceiver;
 
-public class InCallActivity extends Activity implements View.OnClickListener {
+public class InCallActivity extends Activity implements View.OnClickListener, CallManager.CallAcceptListener {
 
+    private static  final  String TAG = "InCallActivity";
     public static final String FRIEND_NAME = "friend_name";
+    public static final String Call_UI_NAME = "start_call" ;
     private AudioEncoder aEncoder;
     private UdpReceiver receiver;
+    private CallManager mCallManager;
     private TimerTask timerTask = null;
     private Timer timer;
 
     private ImageButton btnInCallStop;
+    private ImageButton btnStartCall;
+    private ImageButton btnStopCall;
+    private RelativeLayout layoutCall;
     private TextView tvTimer;
 
     @Override
@@ -47,17 +55,51 @@ public class InCallActivity extends Activity implements View.OnClickListener {
 
         Intent intent = getIntent();
         String friendName = intent.getStringExtra(FRIEND_NAME);
-        ((TextView) findViewById(R.id.tv_id)).setText(friendName);
+        String CallUiName = intent.getStringExtra(Call_UI_NAME);
+
         btnInCallStop = (ImageButton) findViewById(R.id.im_button_stop_in_call);
-        btnInCallStop.setOnClickListener(this);
+        btnStartCall = (ImageButton) findViewById(R.id.im_button_start_call);
+        btnStopCall = (ImageButton) findViewById(R.id.im_button_stop_call);
+        layoutCall = (RelativeLayout) findViewById(R.id.layout_call);
         tvTimer = (TextView) findViewById(R.id.tv_timer);
+
+        btnInCallStop.setOnClickListener(this);
+        btnStartCall.setOnClickListener(this);
+        btnStopCall.setOnClickListener(this);
         timer = new Timer();
-        startCall();
+        tvTimer.setVisibility(View.GONE);
+
+        if(CallUiName.equals("receive_call")){
+            initReceiveCallUI();
+        }else if(CallUiName.equals("start_call")){
+            initStartCallUI();
+        }else{
+            Log.e(TAG, "Wrong Parameter!");
+            this.finish();
+        }
+
+        ((TextView) findViewById(R.id.tv_id)).setText(friendName);
+
+        mCallManager = new CallManager(this, this);
+        mCallManager.sendCallRequest("127.0.0.1", false);
+        //startCall();
 
     }
 
-    void startCall() {
+    private void initReceiveCallUI(){
+        btnInCallStop.setVisibility(View.GONE);
+        layoutCall.setVisibility(View.VISIBLE);
+    }
 
+    private void initStartCallUI(){
+        btnInCallStop.setVisibility(View.VISIBLE);
+        layoutCall.setVisibility(View.GONE);
+
+    }
+
+    private void startCall() {
+
+        tvTimer.setVisibility(View.VISIBLE);
         startRecording();
         receiver = new UdpReceiver();
         try {
@@ -71,14 +113,20 @@ public class InCallActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.im_button_stop_in_call:
-                Log.d("tian---", "stop in call");
                 try {
                     stopRecording();
                     this.finish();
                 } catch (IOException e) {
-                    //  TODO Auto-generated catch block
                     e.printStackTrace();
                 }
+                break;
+            case R.id.im_button_start_call:
+                initStartCallUI();
+                break;
+            case R.id.im_button_stop_call:
+                this.finish();
+                break;
+            default:
                 break;
         }
     }
@@ -136,4 +184,9 @@ public class InCallActivity extends Activity implements View.OnClickListener {
         }
 
     };
+
+    @Override
+    public void onCallAccept() {
+
+    }
 }
